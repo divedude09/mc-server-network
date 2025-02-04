@@ -1,0 +1,213 @@
+services:
+  mc1:
+    image: itzg/minecraft-server
+    container_name: mc-server-1
+    environment:
+      # General Options
+      # UID: "1000"          # The Linux user ID to run as (default: 1000)
+      # GID: "1000"          # The Linux group ID to run as (default: 1000)
+      MEMORY: "2G"         # Initial and max Java memory-heap limit (default: 1G)
+      INIT_MEMORY: "2G"    # Independently sets the initial heap size (default: 1G)
+      MAX_MEMORY: "2G"     # Independently sets the max heap size (default: 1G)
+      TZ: "Europe/Berlin"            # Set timezone (default: UTC)
+      # ENABLE_ROLLING_LOGS: "false" # Use rolling log files (default: false)
+      # ENABLE_JMX: "false"  # Enable remote JMX for profiling (default: false)
+      # JMX_HOST: ""         # IP/host running the Docker container (if JMX enabled)
+      # USE_AIKAR_FLAGS: "false" # Optimal JVM flags for garbage collection (default: false)
+      # JVM_OPTS: ""         # General JVM options (space-delimited)
+      # JVM_XX_OPTS: ""      # JVM options requiring -XX prefix
+      # JVM_DD_OPTS: ""      # System properties (comma-separated name=value pairs)
+      # EXTRA_ARGS: ""       # Extra arguments for the jar file
+      LOG_TIMESTAMP: "true" # Include timestamp with each log entry (default: false)
+
+      # Server Options
+      TYPE: "PAPER"      # Server type (default: VANILLA)
+      PLUGINS: |
+        https://download.luckperms.net/1568/bukkit/loader/LuckPerms-Bukkit-5.4.151.jar
+        https://dev.bukkit.org/projects/chunky-pregenerator/files/5877071/download
+        https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v5.5/bluemap-5.5-paper.jar
+        https://cdn.modrinth.com/data/6G0lCDWV/versions/x8k2WB8a/BlueMap-BannerMarker.jar
+      EULA: "true"        # Must be set to true to accept the EULA (required)
+      # VERSION: "LATEST"    # Minecraft version (default: LATEST)
+      MOTD: "Velocity server running on Docker!"             # Message of the Day for the server
+      DIFFICULTY: "normal"   # Difficulty level: peaceful, easy, normal, hard (default: easy)
+      # ICON: ""             # URL or file path for server icon
+      # OVERRIDE_ICON: "false" # Override existing icon (default: false)
+      MAX_PLAYERS: "500"    # Maximum players (default: 20)
+      # MAX_WORLD_SIZE: ""   # Max world size in blocks (radius)
+      # ALLOW_NETHER: "true" # Allow travel to the Nether (default: true)
+      # ANNOUNCE_PLAYER_ACHIEVEMENTS: "true" # Announce achievements (default: true)
+      ENABLE_COMMAND_BLOCK: "true" # Enable command blocks (default: false)
+      # FORCE_GAMEMODE: "false" # Force players to join in the default game mode (default: false)
+      # GENERATE_STRUCTURES: "true" # Generate structures like villages (default: true)
+      # HARDCORE: "false"     # Enable hardcore mode (default: false)
+      # SNOOPER_ENABLED: "true" # Enable snooping to Minecraft servers (default: true)
+      # MAX_BUILD_HEIGHT: "256" # Maximum building height (default: 256)
+      # SPAWN_ANIMALS: "true" # Allow animal spawning (default: true)
+      # SPAWN_MONSTERS: "true" # Allow monster spawning (default: true)
+      # SPAWN_NPCS: "true"   # Allow NPC spawning (default: true)
+      SPAWN_PROTECTION: "0" # Non-ops protected area size (0 to disable)
+      VIEW_DISTANCE: "32"    # Server-side viewing distance (in chunks)
+      # SEED: ""             # World seed (use quotes for negative numbers)
+      # MODE: "survival"     # Game mode: creative, survival, adventure, spectator (default: survival)
+      # PVP: "true"          # Enable player-vs-player (default: true)
+      # LEVEL_TYPE: "minecraft:default" # World generation type (default: minecraft:default)
+      # GENERATOR_SETTINGS: "" # Additional generator settings
+      # LEVEL: "world"       # World save name (default: world)
+      ONLINE_MODE: "false"  # Authenticate players with Mojang servers (default: true)
+      ALLOW_FLIGHT: "true" # Allow flying in survival mode (default: false)
+      SERVER_NAME: "A Backend Server"      # Server name
+      # SERVER_PORT: "25565" # Server port (default: 25565)
+      # PLAYER_IDLE_TIMEOUT: "" # Idle timeout in minutes
+      # SYNC_CHUNK_WRITES: "" # Synchronize chunk writes
+      # ENABLE_STATUS: ""    # Enable status monitoring
+      # ENTITY_BROADCAST_RANGE_PERCENTAGE: "" # Broadcast range percentage for entities
+      FUNCTION_PERMISSION_LEVEL: "4" # Function permission level
+      # NETWORK_COMPRESSION_THRESHOLD: "" # Compression threshold for network
+      # OP_PERMISSION_LEVEL: "" # Operator permission level
+      # PREVENT_PROXY_CONNECTIONS: "" # Prevent proxy connections
+      # USE_NATIVE_TRANSPORT: "" # Enable native transport
+      # SIMULATION_DISTANCE: "" # Simulation distance for entities
+      # EXEC_DIRECTLY: "false" # Attach to Minecraft server console (default: false)
+      # STOP_SERVER_ANNOUNCE_DELAY: "" # Delay for shutdown announcements
+      # PROXY: ""             # HTTP/HTTPS proxy URL
+      # CONSOLE: "TRUE"       # Console settings for older versions (default: TRUE)
+      # GUI: "TRUE"           # GUI interface compatibility (default: TRUE)
+      STOP_DURATION: "60"   # Graceful shutdown duration in seconds (default: 60)
+    ports:
+      - "25566:25565"  # Minecraft default port
+      - "80:8100"
+    volumes:
+      - mc-data-1:/data
+    tty: true  # Allocate a pseudo-TTY for better interaction
+    stdin_open: true  # Keep stdin open for interaction
+    cpus: 4
+    restart: unless-stopped
+    
+  mc2:
+    image: itzg/minecraft-server
+    container_name: mc-server-2
+    environment:
+      # General Options
+      # UID: "1000"          # The Linux user ID to run as (default: 1000)
+      # GID: "1000"          # The Linux group ID to run as (default: 1000)
+      MEMORY: "2G"         # Initial and max Java memory-heap limit (default: 1G)
+      INIT_MEMORY: "2G"    # Independently sets the initial heap size (default: 1G)
+      MAX_MEMORY: "2G"     # Independently sets the max heap size (default: 1G)
+      TZ: "Europe/Berlin"            # Set timezone (default: UTC)
+      # ENABLE_ROLLING_LOGS: "false" # Use rolling log files (default: false)
+      # ENABLE_JMX: "false"  # Enable remote JMX for profiling (default: false)
+      # JMX_HOST: ""         # IP/host running the Docker container (if JMX enabled)
+      # USE_AIKAR_FLAGS: "false" # Optimal JVM flags for garbage collection (default: false)
+      # JVM_OPTS: ""         # General JVM options (space-delimited)
+      # JVM_XX_OPTS: ""      # JVM options requiring -XX prefix
+      # JVM_DD_OPTS: ""      # System properties (comma-separated name=value pairs)
+      # EXTRA_ARGS: ""       # Extra arguments for the jar file
+      LOG_TIMESTAMP: "true" # Include timestamp with each log entry (default: false)
+
+      # Server Options
+      TYPE: "PAPER"      # Server type (default: VANILLA)
+      PAPER_CHANNEL: experimental
+      PLUGINS: |
+        https://download.luckperms.net/1568/bukkit/loader/LuckPerms-Bukkit-5.4.151.jar
+        https://hangarcdn.papermc.io/plugins/ViaVersion/ViaVersion/versions/5.2.0/PAPER/ViaVersion-5.2.0.jar
+        https://hangarcdn.papermc.io/plugins/ViaVersion/ViaBackwards/versions/5.2.0/PAPER/ViaBackwards-5.2.0.jar
+      EULA: "true"        # Must be set to true to accept the EULA (required)
+      VERSION: "1.21.4"    # Minecraft version (default: LATEST)
+      MOTD: "Velocity server running on Docker!"             # Message of the Day for the server
+      DIFFICULTY: "normal"   # Difficulty level: peaceful, easy, normal, hard (default: easy)
+      # ICON: ""             # URL or file path for server icon
+      # OVERRIDE_ICON: "false" # Override existing icon (default: false)
+      MAX_PLAYERS: "500"    # Maximum players (default: 20)
+      # MAX_WORLD_SIZE: ""   # Max world size in blocks (radius)
+      # ALLOW_NETHER: "true" # Allow travel to the Nether (default: true)
+      # ANNOUNCE_PLAYER_ACHIEVEMENTS: "true" # Announce achievements (default: true)
+      ENABLE_COMMAND_BLOCK: "true" # Enable command blocks (default: false)
+      # FORCE_GAMEMODE: "false" # Force players to join in the default game mode (default: false)
+      # GENERATE_STRUCTURES: "true" # Generate structures like villages (default: true)
+      # HARDCORE: "false"     # Enable hardcore mode (default: false)
+      # SNOOPER_ENABLED: "true" # Enable snooping to Minecraft servers (default: true)
+      # MAX_BUILD_HEIGHT: "256" # Maximum building height (default: 256)
+      # SPAWN_ANIMALS: "true" # Allow animal spawning (default: true)
+      # SPAWN_MONSTERS: "true" # Allow monster spawning (default: true)
+      # SPAWN_NPCS: "true"   # Allow NPC spawning (default: true)
+      SPAWN_PROTECTION: "0" # Non-ops protected area size (0 to disable)
+      VIEW_DISTANCE: "32"    # Server-side viewing distance (in chunks)
+      # SEED: ""             # World seed (use quotes for negative numbers)
+      # MODE: "survival"     # Game mode: creative, survival, adventure, spectator (default: survival)
+      # PVP: "true"          # Enable player-vs-player (default: true)
+      # LEVEL_TYPE: "minecraft:default" # World generation type (default: minecraft:default)
+      # GENERATOR_SETTINGS: "" # Additional generator settings
+      # LEVEL: "world"       # World save name (default: world)
+      ONLINE_MODE: "false"  # Authenticate players with Mojang servers (default: true)
+      ALLOW_FLIGHT: "true" # Allow flying in survival mode (default: false)
+      SERVER_NAME: "Docker Server"      # Server name
+      # SERVER_PORT: "25565" # Server port (default: 25565)
+      # PLAYER_IDLE_TIMEOUT: "" # Idle timeout in minutes
+      # SYNC_CHUNK_WRITES: "" # Synchronize chunk writes
+      # ENABLE_STATUS: ""    # Enable status monitoring
+      # ENTITY_BROADCAST_RANGE_PERCENTAGE: "" # Broadcast range percentage for entities
+      FUNCTION_PERMISSION_LEVEL: "4" # Function permission level
+      # NETWORK_COMPRESSION_THRESHOLD: "" # Compression threshold for network
+      # OP_PERMISSION_LEVEL: "" # Operator permission level
+      # PREVENT_PROXY_CONNECTIONS: "" # Prevent proxy connections
+      # USE_NATIVE_TRANSPORT: "" # Enable native transport
+      # SIMULATION_DISTANCE: "" # Simulation distance for entities
+      # EXEC_DIRECTLY: "false" # Attach to Minecraft server console (default: false)
+      # STOP_SERVER_ANNOUNCE_DELAY: "" # Delay for shutdown announcements
+      # PROXY: ""             # HTTP/HTTPS proxy URL
+      # CONSOLE: "TRUE"       # Console settings for older versions (default: TRUE)
+      # GUI: "TRUE"           # GUI interface compatibility (default: TRUE)
+      STOP_DURATION: "60"   # Graceful shutdown duration in seconds (default: 60)
+    volumes:
+      - mc-data-2:/data
+    tty: true  # Allocate a pseudo-TTY for better interaction
+    stdin_open: true  # Keep stdin open for interaction
+    ports:
+      - "25567:25565"  # Minecraft default port
+    cpus: 4
+    restart: unless-stopped
+      
+  proxy:
+    image: itzg/mc-proxy
+    container_name: mc-proxy
+    environment:
+      TYPE: "VELOCITY"
+      TZ: "Europe/Berlin"
+      PLUGINS: |
+        https://download.luckperms.net/1568/velocity/LuckPerms-Velocity-5.4.151.jar
+        https://hangarcdn.papermc.io/plugins/ViaVersion/ViaVersion/versions/5.2.0/PAPER/ViaVersion-5.2.0.jar
+      CFG_MOTD: "Powered by Docker"
+    ports:
+      - "25565:25577"
+    volumes:
+      - ./config.yml:/config/config.yml
+      - proxy-data:/server
+    tty: true  # Allocate a pseudo-TTY for better interaction
+    stdin_open: true  # Keep stdin open for interaction
+    cpus: 4
+    restart: unless-stopped
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mc-mariadb
+    restart: unless-stopped
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_DATABASE: luckperms
+      MYSQL_USER: luckperms
+    env_file:
+      - secrets.env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    tty: true  # Allocate a pseudo-TTY for better interaction
+    stdin_open: true  # Keep stdin open for interaction
+
+
+volumes:
+  mc-data-1:
+  mc-data-2:
+  proxy-data:
+  mariadb_data:
+
