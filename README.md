@@ -1,2 +1,2 @@
 # mc-server-network
-Files for a docker minecraft network
+Files for my minecraft docker network
