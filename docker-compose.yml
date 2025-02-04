@@ -3,7 +3,6 @@ services:
     image: itzg/minecraft-server
     container_name: mc-server-1
     environment:
-      # General Options
       # UID: "1000"          # The Linux user ID to run as (default: 1000)
       # GID: "1000"          # The Linux group ID to run as (default: 1000)
       MEMORY: "2G"         # Initial and max Java memory-heap limit (default: 1G)
@@ -20,7 +19,6 @@ services:
       # EXTRA_ARGS: ""       # Extra arguments for the jar file
       LOG_TIMESTAMP: "true" # Include timestamp with each log entry (default: false)
 
-      # Server Options
       TYPE: "PAPER"      # Server type (default: VANILLA)
       PLUGINS: |
         https://download.luckperms.net/1568/bukkit/loader/LuckPerms-Bukkit-5.4.151.jar
@@ -75,12 +73,12 @@ services:
       # GUI: "TRUE"           # GUI interface compatibility (default: TRUE)
       STOP_DURATION: "60"   # Graceful shutdown duration in seconds (default: 60)
     ports:
-      - "25566:25565"  # Minecraft default port
+      - "25566:25565"
       - "80:8100"
     volumes:
       - mc-data-1:/data
-    tty: true  # Allocate a pseudo-TTY for better interaction
-    stdin_open: true  # Keep stdin open for interaction
+    tty: true
+    stdin_open: true
     cpus: 4
     restart: unless-stopped
     
@@ -88,7 +86,6 @@ services:
     image: itzg/minecraft-server
     container_name: mc-server-2
     environment:
-      # General Options
       # UID: "1000"          # The Linux user ID to run as (default: 1000)
       # GID: "1000"          # The Linux group ID to run as (default: 1000)
       MEMORY: "2G"         # Initial and max Java memory-heap limit (default: 1G)
@@ -105,7 +102,6 @@ services:
       # EXTRA_ARGS: ""       # Extra arguments for the jar file
       LOG_TIMESTAMP: "true" # Include timestamp with each log entry (default: false)
 
-      # Server Options
       TYPE: "PAPER"      # Server type (default: VANILLA)
       PAPER_CHANNEL: experimental
       PLUGINS: |
@@ -161,10 +157,10 @@ services:
       STOP_DURATION: "60"   # Graceful shutdown duration in seconds (default: 60)
     volumes:
       - mc-data-2:/data
-    tty: true  # Allocate a pseudo-TTY for better interaction
-    stdin_open: true  # Keep stdin open for interaction
+    tty: true
+    stdin_open: true
     ports:
-      - "25567:25565"  # Minecraft default port
+      - "25567:25565"
     cpus: 4
     restart: unless-stopped
       
@@ -183,8 +179,8 @@ services:
     volumes:
       - ./config.yml:/config/config.yml
       - proxy-data:/server
-    tty: true  # Allocate a pseudo-TTY for better interaction
-    stdin_open: true  # Keep stdin open for interaction
+    tty: true
+    stdin_open: true
     cpus: 4
     restart: unless-stopped
 
@@ -201,8 +197,8 @@ services:
       - secrets.env
     volumes:
       - mariadb_data:/var/lib/mysql
-    tty: true  # Allocate a pseudo-TTY for better interaction
-    stdin_open: true  # Keep stdin open for interaction
+    tty: true
+    stdin_open: true
 
 
 volumes:
